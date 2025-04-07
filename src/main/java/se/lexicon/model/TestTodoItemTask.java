@@ -3,7 +3,6 @@ package se.lexicon.model;
 import java.time.LocalDate;
 
 public class TestTodoItemTask {
-
     public static void main(String[] args) {
         // create a person object
         Person assignee = new Person("Agnes", "Nazie", "agnes@gmail.com");
