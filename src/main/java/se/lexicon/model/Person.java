@@ -1,5 +1,7 @@
 package se.lexicon.model;
 
+import java.util.Objects;
+
 public class Person {
     //creates fields
     private static int sequencer = 0;
@@ -7,15 +9,18 @@ public class Person {
     private String firstName;
     private String lastName;
     private String email;
+    // New field to store the credentials (AppUser)
+    private AppUser credentials;
 
     //create constructors for fields
 
-    public Person(String firstName, String lastName, String email) {
+    public Person(String firstName, String lastName, String email, AppUser credentials) {
 
         this.id = ++sequencer;
         setFirstName(firstName);
         setLastName(lastName);
         setEmail(email);
+        this.credentials = credentials;
 
     }
 
@@ -59,14 +64,37 @@ public class Person {
             throw new IllegalArgumentException("Email is not allowed to be Null or Empty");
         this.email = email;
     }
+    //getter for credentials
 
-    // get summary method
-    public String getSummary() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("id: ").append(id)
-                .append(", Name: ").append(firstName).append(" ").append(lastName)
-                .append(", Email: ").append(email);
-        return sb.toString();
+    public AppUser getCredentials() {
+        return credentials;
+    }
+    // setter for credentials
+
+    public void setCredentials(AppUser credentials) {
+        this.credentials = credentials;
+    }
+
+    // Overriding the toString() method to exclude credentials
+    @Override
+    public String toString() {
+        return String.format("Person{id=%d, firstName='%s', lastName='%s', email='%s'}", id, firstName, lastName, email);
+    }
+
+    // Overriding equals() and hashCode() to exclude credentials
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Person person = (Person) obj;
+        return id == person.id &&
+                Objects.equals(firstName, person.firstName) &&
+                Objects.equals(lastName, person.lastName) &&
+                Objects.equals(email, person.email);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, firstName, lastName, email);
     }
 }
-
