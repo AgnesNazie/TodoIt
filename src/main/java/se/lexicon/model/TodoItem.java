@@ -6,7 +6,7 @@ import java.util.Objects;
 public class TodoItem {
     //creates fields
     private static int sequencer = 0;
-    private int id;
+    private final int id;
     String title;
     String taskDescription;
     LocalDate deadLine;
@@ -19,7 +19,6 @@ public class TodoItem {
         setTitle(title);
         this.taskDescription = taskDescription;
         setDeadLine(deadLine);
-        this.done = done;
         setCreator(creator);
     }
     // getters for id
