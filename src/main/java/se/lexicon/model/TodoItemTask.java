@@ -68,4 +68,3 @@ public class TodoItemTask {
         return sb.toString();
     }
 }
-

@@ -18,7 +18,6 @@ public class TodoItem {
         setTitle(title);
         this.taskDescription = taskDescription;
         setDeadLine(deadLine);
-        this.done = done;
         setCreator(creator);
     }
     // getters for id
@@ -98,4 +97,3 @@ public class TodoItem {
         return sb.toString();
     }
 }
-

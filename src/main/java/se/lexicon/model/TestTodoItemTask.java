@@ -26,4 +26,3 @@ public class TestTodoItemTask {
         System.out.println("TodoItemTask: " + task.getSummary());
     }
 }
-
