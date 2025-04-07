@@ -46,7 +46,7 @@ public class Person {
 
     public void setLastName(String lastName) {
         if (lastName == null || lastName.trim().isEmpty())
-            throw  new IllegalArgumentException("Last Name is not allowed to be Null or Empty");
+            throw new IllegalArgumentException("Last Name is not allowed to be Null or Empty");
         this.lastName = lastName;
     }
     //getter for email
@@ -58,9 +58,10 @@ public class Person {
 
     public void setEmail(String email) {
         if (email == null || email.trim().isEmpty())
-            throw  new IllegalArgumentException("Email is not allowed to be Null or Empty");
+            throw new IllegalArgumentException("Email is not allowed to be Null or Empty");
         this.email = email;
     }
+
     // get summary method
     public String getSummary() {
         StringBuilder sb = new StringBuilder();
