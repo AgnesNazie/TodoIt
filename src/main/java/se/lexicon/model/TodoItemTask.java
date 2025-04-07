@@ -15,6 +15,7 @@ public class TodoItemTask {
         this.id = ++sequencer;
         setTodoItem(todoItem);
         setAssignee(assignee);
+        this.assigned = assignee != null;
     }
     // getter for id
 
