@@ -85,7 +85,8 @@ public class TodoItem {
     }
 
     //check if task is overdue
-    public boolean isOverdue() {
+    public boolean isOverdue()
+    {
         return !done && LocalDate.now().isAfter(deadLine);
     }
 
