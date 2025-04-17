@@ -2,23 +2,22 @@ package se.lexicon.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
-
 public class TodoItem {
     //creates fields
     private static int sequencer = 0;
     private final int id;
     String title;
     String taskDescription;
-    LocalDate deadLine;
+     LocalDate deadline;
     boolean done;
     Person creator;
 
     //constructor
-    public TodoItem(String title, String taskDescription, LocalDate deadLine, Person creator) {
+    public TodoItem(String title, String taskDescription, LocalDate deadline, Person creator) {
         this.id = ++sequencer;
         setTitle(title);
         this.taskDescription = taskDescription;
-        setDeadLine(deadLine);
+        setDeadline(deadline);
         setCreator(creator);
     }
     // getters for id
@@ -50,16 +49,17 @@ public class TodoItem {
     }
     //getters for deadline
 
-    public LocalDate getDeadLine() {
-        return deadLine;
+
+    public LocalDate getDeadline() {
+        return deadline;
     }
     //setters for deadline
 
-    public void setDeadLine(LocalDate deadLine) {
+    public void setDeadline(LocalDate deadline) {
         if (deadLine == null || deadLine.isBefore(LocalDate.now()))
             throw new IllegalArgumentException("Deadline cannot be null or in the past");
 
-        this.deadLine = deadLine;
+        this.deadLine = deadline;
     }
     // set for done
 

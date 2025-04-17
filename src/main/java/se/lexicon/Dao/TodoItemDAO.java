@@ -7,12 +7,12 @@ import java.util.Collection;
 
 public interface TodoItemDAO {
     TodoItem persist(TodoItem todoItem);
-    TodoItem findById(int id);
+    TodoItem findById(Integer id);
     Collection<TodoItem> findAll();
     Collection<TodoItem> findAllByDoneStatus(boolean done);
     Collection<TodoItem> findByTitleContains(String title);
-    Collection<TodoItem> findByPersonId(int personId);
+    Collection<TodoItem> findByPersonId(Integer personId);
     Collection<TodoItem> findByDeadlineBefore(LocalDate date);
     Collection<TodoItem> findByDeadlineAfter(LocalDate date);
-    void remove(int id);
+    void remove(Integer id);
 }

@@ -7,70 +7,118 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TodoItemDAOCollection implements TodoItemDAO {
-    private final List<TodoItem> todoItems = new ArrayList<>();
+    private final List<TodoItem> items;
+
+    public TodoItemDAOCollection() {
+        this.items = new ArrayList<TodoItem>();
+    }
+
 
     @Override
     public TodoItem persist(TodoItem todoItem) {
+
         if (todoItem == null) {
             throw new IllegalArgumentException("TodoItem cannot be null");
         }
-        todoItems.add(todoItem);
+        items.add(todoItem);
         return todoItem;
     }
 
     @Override
-    public TodoItem findById(int id) {
-        return todoItems.stream()
-                .filter(todo -> todo.getId() == id)
-                .findFirst()
-                .orElse(null);
+    public TodoItem findById(Integer id) {
+        for (TodoItem item : items) {
+            if (item.getId() == id) {
+                return item;
+            }
+        }
+        return null;
     }
 
     @Override
     public Collection<TodoItem> findAll() {
-        return new ArrayList<>(todoItems);
+        return new ArrayList<>(items);
     }
 
     @Override
     public Collection<TodoItem> findAllByDoneStatus(boolean done) {
-        return todoItems.stream()
-                .filter(todo -> todo.isDone() == done)
-                .collect(Collectors.toList());
+        List<TodoItem> result = new ArrayList<TodoItem>();
+        for (TodoItem item : items) {
+            if (item.isDone() == done) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<TodoItem> findByTitleContains(String title) {
-        return todoItems.stream()
-                .filter(todo -> todo.getTitle().contains(title))
-                .collect(Collectors.toList());
+        List<TodoItem> result = new ArrayList<TodoItem>();
+        if (title == null) {
+            return result;
+        }
+        for (TodoItem item : items) {
+            if (item.getTitle() != null && item.getTitle().contains(title)) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override
-    public Collection<TodoItem> findByPersonId(int personId) {
-        return todoItems.stream()
-                .filter(todo -> todo.getCreator().getId() == personId)
-                .collect(Collectors.toList());
+    public Collection<TodoItem> findByPersonId(Integer personId) {
+        List<TodoItem> result = new ArrayList<TodoItem>();
+        if (personId == null) {
+            return result;
+        }
+        for (TodoItem item : items) {
+            if (item.getCreator() != null && personId.equals(item.getCreator().getId())) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<TodoItem> findByDeadlineBefore(LocalDate date) {
-        return todoItems.stream()
-                .filter(todo -> todo.getDeadLine().isBefore(date))
-                .collect(Collectors.toList());
+        List<TodoItem> result = new ArrayList<TodoItem>();
+        if (date == null) {
+            return result;
+        }
+        for (TodoItem item : items) {
+            if (item.getDeadline() != null && item.getDeadline().isBefore(date)) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override
     public Collection<TodoItem> findByDeadlineAfter(LocalDate date) {
-        return todoItems.stream()
-                .filter(todo -> todo.getDeadLine().isAfter(date))
-                .collect(Collectors.toList());
+        List<TodoItem> result = new ArrayList<TodoItem>();
+        if (date == null) {
+            return result;
+        }
+        for (TodoItem item : items) {
+            if (item.getDeadline() != null && item.getDeadline().isAfter(date)) {
+                result.add(item);
+            }
+        }
+        return result;
     }
 
     @Override
-    public void remove(int id) {
-        todoItems.removeIf(todo -> todo.getId() == id);
+    public void remove(Integer id) {
+        TodoItem toRemove = null;
+        for (TodoItem item : items) {
+            if (item.getId() == id) {
+                toRemove = item;
+                break;
+            }
+        }
+        if (toRemove != null) {
+            items.remove(toRemove);
+        }
     }
 }

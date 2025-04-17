@@ -1,5 +1,6 @@
 package se.lexicon.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class TodoItemTask {
@@ -13,7 +14,7 @@ public class TodoItemTask {
 
     //constructor
 
-    public TodoItemTask(TodoItem todoItem, Person assignee) {
+    public TodoItemTask(TodoItem todoItem, Person assignee,) {
         this.id = ++sequencer;
         setTodoItem(todoItem);
         setAssignee(assignee);
@@ -57,6 +58,7 @@ public class TodoItemTask {
         this.assignee = assignee;
         this.assigned = (assignee != null);
     }
+
 
     // override toString() without Person object (assignee)
     @Override
