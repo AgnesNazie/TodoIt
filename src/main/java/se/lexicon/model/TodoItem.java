@@ -56,10 +56,10 @@ public class TodoItem {
     //setters for deadline
 
     public void setDeadline(LocalDate deadline) {
-        if (deadLine == null || deadLine.isBefore(LocalDate.now()))
+        if (deadline == null || deadline.isBefore(LocalDate.now()))
             throw new IllegalArgumentException("Deadline cannot be null or in the past");
 
-        this.deadLine = deadline;
+        this.deadline = deadline;
     }
     // set for done
 
@@ -87,14 +87,14 @@ public class TodoItem {
     //check if task is overdue
     public boolean isOverdue()
     {
-        return !done && LocalDate.now().isAfter(deadLine);
+        return !done && LocalDate.now().isAfter(deadline);
     }
 
     // Override toString to represent all fields except Person object(s)
     @Override
     public String toString() {
         return String.format("TodoItem{id=%d, title='%s', description='%s', deadline=%s, done=%b}",
-                id, title, taskDescription, deadLine, done);
+                id, title, taskDescription, deadline, done);
     }
 
     // Override equals to compare all fields except the Person object (creator)
@@ -107,12 +107,12 @@ public class TodoItem {
                 id == todoItem.id &&
                 Objects.equals(title, todoItem.title) &&
                 Objects.equals(taskDescription, todoItem.taskDescription) &&
-                Objects.equals(deadLine, todoItem.deadLine);
+                Objects.equals(deadline, todoItem.deadline);
     }
 
     // Override hashCode to exclude the Person object (creator)
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, taskDescription, deadLine, done);
+        return Objects.hash(id, title, taskDescription, deadline, done);
     }
 }

@@ -30,7 +30,7 @@ public class PersonDAOCollection implements PersonDAO {
     }
 
     @Override
-    public Person findById(int id) {
+    public Person findById(Integer id) {
         for (Person person : persons) {
             if (person.getId() == id) {
                 return person;
@@ -55,7 +55,7 @@ public class PersonDAOCollection implements PersonDAO {
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(Integer id) {
         persons.removeIf(person -> person.getId() == id);
     }
 }

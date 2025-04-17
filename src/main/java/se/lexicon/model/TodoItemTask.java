@@ -14,7 +14,7 @@ public class TodoItemTask {
 
     //constructor
 
-    public TodoItemTask(TodoItem todoItem, Person assignee,) {
+    public TodoItemTask(TodoItem todoItem, Person assignee) {
         this.id = ++sequencer;
         setTodoItem(todoItem);
         setAssignee(assignee);

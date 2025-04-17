@@ -6,7 +6,6 @@ import se.lexicon.model.TodoItemTask;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
     private final List<TodoItemTask> tasks = new ArrayList<>();
@@ -21,11 +20,13 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
     }
 
     @Override
-    public TodoItemTask findById(int id) {
-        return tasks.stream()
-                .filter(task -> task.getId() == id)
-                .findFirst()
-                .orElse(null);
+    public TodoItemTask findById(Integer id) {
+        for (TodoItemTask task : tasks) {
+            if (task.getId() == id) {
+                return task;
+            }
+        }
+        return null;
     }
 
     @Override
@@ -35,20 +36,28 @@ public class TodoItemTaskDAOCollection implements TodoItemTaskDAO {
 
     @Override
     public Collection<TodoItemTask> findByAssignedStatus(boolean assigned) {
-        return tasks.stream()
-                .filter(task -> task.isAssigned() == assigned)
-                .collect(Collectors.toList());
+        List<TodoItemTask> result = new ArrayList<>();
+        for (TodoItemTask task : tasks) {
+            if (task.isAssigned() == assigned) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 
     @Override
-    public Collection<TodoItemTask> findByPersonId(int personId) {
-        return tasks.stream()
-                .filter(task -> task.getAssignee() != null && task.getAssignee().getId() == personId)
-                .collect(Collectors.toList());
+    public Collection<TodoItemTask> findByPersonId(Integer personId) {
+        List<TodoItemTask> result = new ArrayList<>();
+        for (TodoItemTask task : tasks) {
+            if (task.getAssignee() != null && task.getAssignee().getId() == personId) {
+                result.add(task);
+            }
+        }
+        return result;
     }
 
     @Override
-    public void remove(int id) {
+    public void remove(Integer id) {
         tasks.removeIf(task -> task.getId() == id);
     }
 }
